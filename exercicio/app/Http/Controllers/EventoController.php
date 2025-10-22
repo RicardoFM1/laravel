@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evento;
+use Illuminate\Validation\Rule;
 
 class EventoController extends Controller
 {
@@ -45,9 +46,31 @@ class EventoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function filtrar(Request $request)
+    public function criar(Request $request)
     {
-        
+       
+
+        $validado = $request->validate([
+            'nome' => [
+            'required'
+        ], 
+        "data_inicio" => [
+             Rule::date()->format("Y-m-d"), 
+             "required"
+        ],
+        "data_fim" => [
+            Rule::date()->format("Y-m-d"), 
+            "required", 
+            "after:data_inicio"
+        ]
+        ]
+    );
+       
+       $evento = new Evento;
+       $evento->nome = $validado["nome"];
+       $evento->data_inicio = $validado["data_inicio"];
+       $evento->data_fim = $validado["data_fim"];
+       $evento->save();
     }
 
     /**
