@@ -31,12 +31,9 @@ class IngressosController extends Controller
    }
 
 
-   public function criar(Request $request)
+   public function criar(Request $request, int $eventoId)
    {
     $validado = $request->validate([
-        "evento_id" => [
-            "required"
-        ],
         "tipo" => [
             "required"
         ],
@@ -47,7 +44,7 @@ class IngressosController extends Controller
 
 
     $ingresso = new Ingressos();
-    $ingresso->evento_id = $validado["evento_id"];
+    $ingresso->evento_id = $eventoId;
     $ingresso->tipo = $validado["tipo"];
     $ingresso->valor = $validado["valor"];
     $ingresso->save();

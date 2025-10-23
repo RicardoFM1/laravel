@@ -25,5 +25,5 @@ Route::delete("{id}", [EventoController::class, 'excluir']);
 Route::prefix("/ingressos") -> group((function (){
     Route::get("", [IngressosController::class, 'listar']);
     Route::get("{eventoId}", [IngressosController::class, 'buscarPorEventoId']);
-    Route::post("", [IngressosController::class, 'criar']);
+    Route::post("{eventoId}", [IngressosController::class, 'criar']);
 }));
