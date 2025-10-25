@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventoRequest;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use Illuminate\Validation\Rule;
@@ -13,7 +14,7 @@ class EventoController extends Controller
      */
     public function listar(Request $request)
     {
-        $consulta = Evento::query();
+        $consulta = Evento::query()->with("ingressos");
         
         $filtro = $request->get("filtro");
         if(!empty($filtro)){
@@ -46,11 +47,25 @@ class EventoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function criar(Request $request)
+    public function criar(EventoRequest $request)
     {
        
 
-        $validado = $request->validate([
+        $validado = $request->all();
+       
+       $evento = new Evento;
+       $evento->nome = $validado["nome"];
+       $evento->data_inicio = $validado["data_inicio"];
+       $evento->data_fim = $validado["data_fim"];
+       $evento->save();
+
+       return ["message" => "evento criado com sucesso!"];
+    }
+
+   
+    public function editar(Request $request, string $id)
+    {
+         $validado = $request->validate([
             'nome' => [
             'required'
         ], 
@@ -66,26 +81,19 @@ class EventoController extends Controller
         ]
     );
        
-       $evento = new Evento;
+       
+       $evento = Evento::find($id);
        $evento->nome = $validado["nome"];
        $evento->data_inicio = $validado["data_inicio"];
        $evento->data_fim = $validado["data_fim"];
        $evento->save();
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+       return ["message" => "evento atualizado com sucesso!"];
+}
+ public function excluir(Request $request, string $id){
+    $evento = Evento::find($id);
+    $evento->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    return ["message" => "evento excluido com sucesso!"];
+ }
 }
