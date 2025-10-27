@@ -13,7 +13,7 @@ class IngressosController extends Controller
 
 {
    public function listar(Request $request){
-    $consulta = Ingressos::query();
+    $consulta = Ingressos::query()->with("evento");
 
     $ingressos = $consulta->get();
 
