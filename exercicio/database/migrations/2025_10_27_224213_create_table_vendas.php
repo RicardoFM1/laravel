@@ -23,7 +23,7 @@ return new class extends Migration
         if(Schema::hasTable("vendas")){
             Schema::table("vendas", function (Blueprint $table) {
                 $table->integer("ingresso_id");
-                $table->integer("valor");
+                $table->decimal("valor", total: 8, places: 2);
                 $table->integer("evento_id");
                 $table->string("cpf", 11);
 
