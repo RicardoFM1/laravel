@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\EventoController;
 use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\IngressosController;
+use App\Http\Controllers\VendaController;
 use App\Http\Requests\IngressoRequest;
 
 Route::get('/user', function (Request $request) {
@@ -30,4 +31,9 @@ Route::prefix("/ingressos") -> group((function (){
     Route::put("/editar/{ingressoId}", [IngressosController::class, 'editar']);
     Route::delete("/deletar/{ingressoId}", [IngressosController::class, "deletar"]);
     Route::post("{eventoId}", [IngressosController::class, 'criar']);
+}));
+
+Route::prefix("/vendas") -> group((function () {
+    Route::get("", [VendaController::class, "listar"]);
+    Route::post("", [VendaController::class, "criar"]);
 }));
