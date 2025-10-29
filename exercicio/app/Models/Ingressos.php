@@ -14,7 +14,6 @@ class Ingressos extends Model
 
     protected $primaryKey = "id";
 
-    public $timestamps = false;
 
     public function evento(): BelongsTo{
         return $this->belongsTo(Evento::class);

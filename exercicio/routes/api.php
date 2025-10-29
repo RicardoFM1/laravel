@@ -14,7 +14,6 @@ Route::get('/user', function (Request $request) {
 
 
 
-
 Route::prefix('/evento')->group((function () {
 Route::get('', [EventoController::class, 'listar']);
 Route::get('{id}', [EventoController::class, 'buscar']);
@@ -33,7 +32,7 @@ Route::prefix("/ingressos") -> group((function (){
     Route::post("{eventoId}", [IngressosController::class, 'criar']);
 }));
 
-Route::prefix("/vendas") -> group((function () {
-    Route::get("", [VendaController::class, "listar"]);
-    Route::post("", [VendaController::class, "criar"]);
+Route::prefix("/vendas") -> group((function (){
+    Route::get("", [VendaController::class, 'listar']);
+    Route::post("", [VendaController::class, 'criar']);
 }));

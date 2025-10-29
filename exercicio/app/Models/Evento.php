@@ -19,4 +19,8 @@ class Evento extends Model
     {
         return $this->hasMany(Ingressos::class);
     }
+    public function vendas(): HasMany 
+    {
+        return $this->hasMany(Vendas::class);
+    }
 }

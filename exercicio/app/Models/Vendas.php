@@ -14,7 +14,6 @@ class Vendas extends Model
 
     protected $primaryKey = "id";
 
-    public $timestamps = false;
 
     public function ingresso(): BelongsTo {
         return $this->belongsTo(Ingressos::class);

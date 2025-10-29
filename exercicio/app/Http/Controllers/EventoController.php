@@ -14,7 +14,7 @@ class EventoController extends Controller
      */
     public function listar(Request $request)
     {
-        $consulta = Evento::query()->with("ingressos");
+        $consulta = Evento::query()->with("ingressos", "vendas");
         
         $filtro = $request->get("filtro");
         if(!empty($filtro)){

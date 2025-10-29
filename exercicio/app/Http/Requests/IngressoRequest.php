@@ -26,7 +26,8 @@ class IngressoRequest extends FormRequest
             "required"
         ],
         "valor" => [
-            "required"
+            "required",
+            "numeric"
         ]
         ];
     }

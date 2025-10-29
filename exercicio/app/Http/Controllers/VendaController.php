@@ -17,6 +17,7 @@ class VendaController extends Controller
         return [$vendas->toArray()];
     }
     public function criar(VendaRequest $request){
+        
         $validado = $request->all();
 
         $venda = new Vendas();
@@ -26,6 +27,6 @@ class VendaController extends Controller
         $venda->cpf = $validado["cpf"];
         $venda->save();
 
-        return [$venda];
+        return ["Venda criada com sucesso!"];
     }
 }
